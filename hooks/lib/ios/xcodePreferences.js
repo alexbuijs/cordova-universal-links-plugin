@@ -12,7 +12,7 @@ Which is:
     compare = require('node-version-compare'),
     ConfigXmlHelper = require('../configXmlHelper.js'),
     // pbxFile = require('xcode/lib/pbxFile'),
-    IOS_DEPLOYMENT_TARGET = '8.0',
+    IOS_DEPLOYMENT_TARGET = '6.0',
     COMMENT_KEY = /_comment$/,
     context;
 
