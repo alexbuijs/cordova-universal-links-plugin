@@ -141,7 +141,7 @@ function domainsListEntryForHost(host) {
  */
 function pathToEntitlementsFile() {
   if (entitlementsFilePath === undefined) {
-    entitlementsFilePath = path.join(getProjectRoot(), 'platforms', 'ios', getProjectName(), 'Resources', getProjectName() + '.entitlements');
+    entitlementsFilePath = path.join(getProjectRoot(), 'platforms', 'ios', getProjectName(), 'Entitlements-Release.plist');
   }
 
   return entitlementsFilePath;
