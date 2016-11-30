@@ -65,7 +65,7 @@ function activateUniversalLinksInAndroid(cordovaContext, pluginPreferences) {
   androidManifestWriter.writePreferences(cordovaContext, pluginPreferences);
 
   // generate html file with the <link> tags that you should inject on the website.
-  androidWebHook.generate(cordovaContext, pluginPreferences);
+  // androidWebHook.generate(cordovaContext, pluginPreferences);
 }
 
 /**
@@ -76,11 +76,12 @@ function activateUniversalLinksInAndroid(cordovaContext, pluginPreferences) {
  */
 function activateUniversalLinksInIos(cordovaContext, pluginPreferences) {
   // modify xcode project preferences
-  iosProjectPreferences.enableAssociativeDomainsCapability(cordovaContext);
+  // iosProjectPreferences.enableAssociativeDomainsCapability(cordovaContext);
 
   // generate entitlements file
-  iosProjectEntitlements.generateAssociatedDomainsEntitlements(cordovaContext, pluginPreferences);
+  iosProjectEntitlements.generateAssociatedDomainsEntitlements(cordovaContext, pluginPreferences, 'Debug');
+  iosProjectEntitlements.generateAssociatedDomainsEntitlements(cordovaContext, pluginPreferences, 'Release');
 
   // generate apple-site-association-file
-  iosAppSiteAssociationFile.generate(cordovaContext, pluginPreferences);
+  // iosAppSiteAssociationFile.generate(cordovaContext, pluginPreferences);
 }

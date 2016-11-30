@@ -29,13 +29,13 @@ module.exports = {
  * @param {Object} cordovaContext - cordova context object
  * @param {Object} pluginPreferences - plugin preferences from config.xml; already parsed
  */
-function generateEntitlements(cordovaContext, pluginPreferences) {
+function generateEntitlements(cordovaContext, pluginPreferences, env) {
   context = cordovaContext;
 
-  var currentEntitlements = getEntitlementsFileContent();
+  var currentEntitlements = getEntitlementsFileContent(env);
   var newEntitlements = injectPreferences(currentEntitlements, pluginPreferences);
 
-  saveContentToEntitlementsFile(newEntitlements);
+  saveContentToEntitlementsFile(newEntitlements, env);
 }
 
 // endregion
@@ -47,9 +47,9 @@ function generateEntitlements(cordovaContext, pluginPreferences) {
  *
  * @param {Object} content - data to save; JSON object that will be transformed into xml
  */
-function saveContentToEntitlementsFile(content) {
+function saveContentToEntitlementsFile(content, env) {
   var plistContent = plist.build(content);
-  var filePath = pathToEntitlementsFile();
+  var filePath = pathToEntitlementsFile(env);
 
   // ensure that file exists
   mkpath.sync(path.dirname(filePath));
@@ -63,8 +63,8 @@ function saveContentToEntitlementsFile(content) {
  *
  * @return {String} entitlements file content
  */
-function getEntitlementsFileContent() {
-  var pathToFile = pathToEntitlementsFile();
+function getEntitlementsFileContent(env) {
+  var pathToFile = pathToEntitlementsFile(env);
   var content;
 
   try {
@@ -139,12 +139,8 @@ function domainsListEntryForHost(host) {
  *
  * @return {String} absolute path to entitlements file
  */
-function pathToEntitlementsFile() {
-  if (entitlementsFilePath === undefined) {
-    entitlementsFilePath = path.join(getProjectRoot(), 'platforms', 'ios', getProjectName(), 'Resources', getProjectName() + '.entitlements');
-  }
-
-  return entitlementsFilePath;
+function pathToEntitlementsFile(env) {
+  return path.join(getProjectRoot(), 'platforms', 'ios', getProjectName(), 'Entitlements-' + env + '.plist');
 }
 
 /**
